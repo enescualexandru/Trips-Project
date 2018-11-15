@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexandru Enescu - My Trips App</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link href="../static/css/bootstrap-4.0.0.css" th:href="@{/css/bootstrap-4.0.0.css}" rel="stylesheet"
+          type="text/css"/>
+    <link href="../static/css/ekko-lightbox.css" th:href="@{/css/ekko-lightbox.css}" rel="stylesheet"
+          type="text/css"/>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="../static/js/config.js" th:src="@{/js/config.js}"></script>
+</head>
+
+<body onload="initialize()">
+
+<script type="text/javascript" src="../static/js/jquery-3.2.1.min.js" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script type="text/javascript" src="../static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+<script type="text/javascript" src="../static/js/bootstrap-4.0.0.js" th:src="@{/js/bootstrap-4.0.0.js}"></script>
+
+<script type="text/javascript" src="../static/js/ekko-lightbox.js" th:src="@{/js/ekko-lightbox.js}"></script>
+<script type="text/javascript" src="../static/js/ekko-lightbox.min" th:src="@{/js/ekko-lightbox.min}"></script>
+
+<table align="center" width="100%">
+    <tr>
+        <td>
+            <div align="center" th:class="alerts" role="alert" id="alerts">
+                <span class="alerts" align="center" th:if="${msg}" th:text="${msg}"></span>
+
+            </div>
+        </td>
+    </tr>
+</table>
+<table align="center" id="myHeader" class="header">
+    <tr>
+        <td align="left" width="80%">My Trips App</td>
+        <div class="topnav">
+            <td align="center" width="10%"><a th:href="@{/profile}" class="nav">Profile</a></td>
+            <td align="center" width="10%"><a href="#login" class="nav">Login</a></td>
+
+        </div>
+    </tr>
+</table>
+<table align="center" class="content divTableMain" cellspacing="1">
+    <tr>
+        <td height="20px" width="100%">
+        </td>
+    </tr>
+    <tr>
+        <td valign="baseline"><h6>&nbsp;&nbsp;Trips available:</h6>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" height="20px" width="90%">
+            <table width="100%">
+                <tr>
+                    <td width="70%">
+                        <form id="selectTrip" class="form" method="get" th:action="@{/}" th:object="${tripsList}">
+                            <div class="input-group">
+                                <select class="custom-select-lg"
+                                        onchange="if (this.value) window.location.href=('/'+'?id='+this.value)"
+                                        name="id" id="inputGroupSelect04">
+                                    <option th:each="trip:${tripsList}" th:value="${trip.trip.id}"
+                                            th:text="${trip.trip.title}">
+                                    </option>
+                                </select>
+                            </div>
+                        </form>
+                        <script th:inline="javascript">
+
+                            function getSelectValue() {
+                                var selectedValue = document.getElementById("id").value;
+                                console.log(selectedValue);
+                            }
+
+                            getSelectValue();
+
+                        </script>
+                    </td>
+
+                    <td width="5%" align="right"></td>
+                    <td width="10%" align="center">
+                        <form th:action="@{/edit}" method="get" th:object="${tripsList[0].trip.id}" id="tc"
+                              name="tripId">
+                            <button class="btn btn-outline-primary btn-sm" th:value="${tripsList[0].trip.id}" name="id"
+                                    type="submit">EDIT
+                                TRIP
+                            </button>
+                        </form>
+
+
+                    <td width="10%" align="center">
+                        <form th:action="@{/addtrip}">
+                            <button id="btn btn-success" class="btn btn-outline-success btn-sm" data-target="#theModal"
+                                    data-toggle="modal" type="submit">ADD TRIP
+                            </button>
+
+                        </form>
+
+                    </td>
+                    <td width="10%" height="30px" align="center">
+
+                        <button class="btn btn-outline-danger btn-sm" name="id" data-toggle="modal"
+                                data-target="#deleteModal">DELETE
+                            TRIP
+                        </button>
+
+                    </td>
+                    <td width="30px" height="30px" align="center"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <td colspan="2">
+        <hr class="style4"/>
+    </td>
+    <tr>
+        <td colspan="2" width="90%" valign="bottom" align="left"><h6>&nbsp;&nbsp;Impressions:</h6>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2" width="90%">
+            <div align="center">
+                <label for="exampleFormControlTextarea3"></label>
+                <textarea draggable="false" readonly th:text="${tripsList[0].trip.description}" class="form-control"
+                          id="exampleFormControlTextarea3" rows="5" cols="12">
+				</textarea>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <hr class="style4"/>
+        </td>
+    </tr>
+    <tr>
+        <td width="70%" style="border-radius: 12px" align="left"><h6>&nbsp;&nbsp;Photos:</h6>
+            <table>
+                <tr>
+                    <td width="10px"></td>
+                    <td class="rounded" align="center" width="300px" height="200px">
+
+                        <a data-gallery="tripphotos" th:href="${tripsList[0].spotList[0].filePath}"
+                           data-toggle="lightbox" th:data-title="${tripsList[0].spotList[0].title}">
+                            <img title="Click for expanding" class="img-thumbnail img1"
+                                 th:src="${tripsList[0].spotList[0].filePath}"/>
+                        </a>
+                    </td>
+                    <td width="10px"></td>
+                    <td class="rounded" align="center" width="300px" height="200px">
+
+                        <a data-gallery="tripphotos" th:href="${tripsList[0].spotList[1].filePath}"
+                           data-toggle="lightbox" th:data-title="${tripsList[0].spotList[1].title}">
+                            <img title="Click for larger size" class="img-thumbnail img2"
+                                 th:src="${tripsList[0].spotList[1].filePath}"/>
+                        </a>
+
+                    </td>
+                    <td width="20px"></td>
+                </tr>
+                <tr>
+                    <td width="1%"></td>
+                    <td valign="center" align="center" class="divTableCell"><h5
+                            th:text="${tripsList[0].spotList[0].title}">Photo 1 Title</h5></td>
+                    <td width="1%"></td>
+                    <td align="center" class="divTableCell"><h5 th:text="${tripsList[0].spotList[1].title}">Photo 2
+                        Title</h5></td>
+                </tr>
+                <tr>
+                    <td width="1%"></td>
+                    <td align="center" width="300px" class="divTableCell">
+						<textarea draggable="false" readonly th:text="${tripsList[0].spotList[0].description}"
+                                  class="form-control"
+                                  rows="6" cols="8">Photo 1 Desc
+				        </textarea>
+
+                    </td>
+                    <td width="1%"></td>
+                    <td align="center" width="300px" class="divTableCell">
+						<textarea draggable="false" readonly th:text="${tripsList[0].spotList[1].description}"
+                                  class="form-control"
+                                  rows="6" cols="8">Photo 2 Desc
+				        </textarea>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+        <td width="30%" align="center" class="content1">
+            <div class="divTableCell">
+                <table width="300px" bgcolor=#FFFCFC align="center">
+
+                    <tr>
+
+                        <td width="30%" valign="center" class="divTableCell2" bgcolor="#C2CAD0"><h6>
+                            <strong>Location:</strong></h6></td>
+
+                        <td width="70%" class="divTableCell" align="center"><h6 th:text="${tripsList[0].trip.location}">
+                            Location</h6></td>
+                    </tr>
+                    <tr>
+                        <td width="30%" valign="center" class="divTableCell2" bgcolor="#C2CAD0"><h6>
+                            <strong>Dates:</strong></h6></td>
+                        <td width="70%" class="divTableCell" align="center"><h6
+                                th:text="${{tripsList[0].trip.startDate}}+'  to   '+${{tripsList[0].trip.endDate}}"></h6>
+                        </td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" width="220px" height="250px">
+                            <div id="map_canvas" style="width:100%; height:100%; z-index: 0;">
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                </table>
+
+            </div>
+
+
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="center" width="100%">
+            <hr class="style18"/>
+
+            <!-- MODAL DELETE BUTTON -->
+            <div id="deleteModal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
+                 aria-labelledby="deleteModal" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+
+                    <div class="modal-content">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="modal-header">
+                                        <h6 class="modal-title" id="exampleModalLongTitle">Trip delete</h6>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td height="120px" valign="center" width="100%" align="center"><h5
+                                        th:text="'Are you sure you want to delete the trip \''+${tripsList[0].trip.title}+ '\' ?'"></h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="120px" align="center" valign="center">
+                                    <form th:action="@{/delete}" method="get" th:object="${tripsList}">
+                                        <button class="btn btn-outline-danger btn-lg" th:value="${tripsList[0].trip.id}"
+                                                name="id" type="submit">DELETE
+                                            TRIP
+                                        </button>
+                                    </form>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="modal-footer">
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <!-- END MODAL DELETE BUTTON -->
+
+
+            <!-- MODAL PHOTO -->
+            <div id="photoModal" class="modal fade" tabindex="-1" role="dialog"
+                 aria-labelledby="deleteModal" aria-hidden="true">
+                <div class="">
+
+                    <div class="modal-content" align="center">
+                        <table width="40%" align="center">
+                            <tr>
+                                <td>
+                                    <div class="modal-header">
+                                        <h6 class="modal-title" id="photo Modal">Trip delete</h6>
+                                        <button type="button" class="close" data-dismiss="photoModal"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td height="30%">
+                                    <img height="30%" width="40%" th:src="${tripsList[0].spotList[0].filePath}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="modal-footer">
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <!-- END MODAL PHOTO -->
+
+            <script type="text/javascript" th:inline="javascript">
+                var msg = [[${msg}]];
+                if (msg) {
+                    $("#alerts").fadeTo(2000, 500).slideUp(500, function () {
+                        $(".alerts").slideUp(500);
+                    });
+                }
+            </script>
+
+            <script>
+                $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+                    event.preventDefault();
+                    $(this).ekkoLightbox();
+                });
+            </script>
+
+            <script type="text/javascript" th:inline="javascript">
+                var geocoder;
+                var map;
+                var address = [[${tripsList[0].trip.location}]];
+
+                function initialize() {
+                    geocoder = new google.maps.Geocoder();
+                    var latlng = new google.maps.LatLng(45.6580, 25.6012);
+                    var myOptions = {
+                        zoom: 5,
+                        center: latlng,
+                        mapTypeControl: false,
+                        mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+                        navigationControl: false,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                    if (geocoder) {
+                        geocoder.geocode({'address': address}, function (results, status) {
+                            if (status == google.maps.GeocoderStatus.OK) {
+                                if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+                                    map.setCenter(results[0].geometry.location);
+
+                                    var infowindow = new google.maps.InfoWindow(
+                                        {
+                                            content: '<b>' + address + '</b>',
+                                            size: new google.maps.Size(150, 50)
+                                        });
+
+                                    var marker = new google.maps.Marker({
+                                        position: results[0].geometry.location,
+                                        map: map,
+                                        title: address
+                                    });
+                                    google.maps.event.addListener(marker, 'click', function () {
+                                        infowindow.open(map, marker);
+                                    });
+
+                                } else {
+                                    //  alert("No results found");
+                                }
+                            } else {
+                                // alert("Geocode was not successful for the following reason: " + status);
+                            }
+                        });
+                    }
+                }
+            </script>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

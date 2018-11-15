@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Trip add</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link href="../static/css/bootstrap-4.0.0.css" th:href="@{/css/bootstrap-4.0.0.css}" rel="stylesheet"
+          type="text/css"/>
+
+    <link rel="stylesheet" href="../static/css/jquery.modal.min.css" th:src="@{/css/jquery.modal.min.css}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<script type="text/javascript" src="../static/js/jquery-3.2.1.min.js" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script type="text/javascript" src="../static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+<script type="text/javascript" src="../static/js/bootstrap-4.0.0.js" th:src="@{/js/bootstrap-4.0.0.js}"></script>
+
+<script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" src="../static/js/jquery.modal.min.js " th:src="@{/js/jquery.modal.min.js}"></script>
+
+<table width="50%" class="divTableMain" bgcolor="#EFF0EF" align="center"
+       style="outline-style: solid; outline-width: 0px; outline-color: #5a6268">
+    <tr>
+        <td width="30px"></td>
+        <td width="95%">
+            <table width="100%">
+                <tr>
+                    <td class="rounded" width="100%" height="80px" valign="center" align="center"><h4>New trip
+                        details</h4></td>
+                </tr>
+                <tr>
+                    <td width="100%">
+                        <form class="needs-validation" th:action="@{/addtrip}" th:object="${tc}" novalidate
+                              method="POST" enctype="multipart/form-data">
+
+                            <div class="form-group row">
+                                <label for="title" class="col-sm-2 col-form-label col-form-label-sm">Title</label>
+                                <div class="col-sm-10">
+                                    <input th:field="*{trip.title}" type="text" class="form-control form-control-sm"
+                                           id="title" placeholder="enter title" required/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="textarea-char-counter" class="col-sm-2 col-form-label col-form-label-sm">Description</label>
+                                <div class="col-sm-10">
+                                    <textarea th:field="*{trip.description}" id="textarea-char-counter"
+                                              class="form-control md-textarea" length="1000" rows="5"
+                                              placeholder="enter description" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="startdate" class="col-sm-2 col-form-label col-form-label-sm">Start
+                                    Date</label>
+                                <div class="col-sm-10">
+                                    <input th:field="*{trip.startDate}" type="date" class="form-control form-control-sm"
+                                           id="startdate" placeholder="start date" required/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="enddate" class="col-sm-2 col-form-label col-form-label-sm">End Date</label>
+                                <div class="col-sm-10">
+                                    <input th:field="*{trip.endDate}" type="date" class="form-control form-control-sm"
+                                           id="enddate" placeholder="end date" required/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="locationT"
+                                       class="col-sm-2 col-form-label col-form-label-sm">Location</label>
+                                <div class="col-sm-10">
+                                    <input th:field="*{trip.location}" type="text" class="form-control form-control-sm"
+                                           id="locationT" placeholder="enter location" required/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="photo1" class="col-sm-2 col-form-label col-form-label-sm">Photo 1</label>
+                                <div class="col-sm-10">
+                                    <input th:field="*{img1}" type="file" accept="image/*"
+                                           class="form-control form-control-sm" id="photo1" required/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="photo1title" class="col-sm-2 col-form-label col-form-label-sm">Photo 1
+                                    title</label>
+                                <div class="col-sm-10">
+                                    <input th:field="*{spot1.title}" type="text" class="form-control form-control-sm"
+                                           id="photo1title" placeholder="enter photo 1 title" required/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="photo1desc" class="col-sm-2 col-form-label col-form-label-sm">Photo 1
+                                    description</label>
+                                <div class="col-sm-10">
+                                    <textarea th:field="*{spot1.description}" id="photo1desc"
+                                              class="form-control md-textarea" length="255" rows="3"
+                                              placeholder="enter photo 1 description" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="photo2" class="col-sm-2 col-form-label col-form-label-sm">Photo 2</label>
+
+                                <div class="col-sm-10">
+                                    <input th:field="*{img2}" type="file" accept="image/*"
+                                           class="form-control form-control-sm" id="photo2" required/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="photo2title" class="col-sm-2 col-form-label col-form-label-sm">Photo 2
+                                    title</label>
+                                <div class="col-sm-10">
+                                    <input th:field="*{spot2.title}" type="text" class="form-control form-control-sm"
+                                           id="photo2title" placeholder="enter photo 2 title" required/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="photo2desc" class="col-sm-2 col-form-label col-form-label-sm">Photo 2
+                                    description</label>
+                                <div class="col-sm-10">
+                                    <textarea th:field="*{spot2.description}" id="photo2desc"
+                                              class="form-control md-textarea" length="255" rows="3"
+                                              placeholder="enter photo 2 description" required></textarea>
+                                </div>
+                            </div>
+
+                            <button name="option" class="btn btn-outline-primary spacerformbutton" type="submit"
+                                    value="Add trip">Add trip
+                            </button>
+                            <a href="/" id="cancel" name="cancel" class="btn btn-outline-secondary spacerformbutton"
+                               rel="modal:close">Cancel</a>
+
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td width="30px"></td>
+    </tr>
+
+</table>
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
+</body>
+</html>

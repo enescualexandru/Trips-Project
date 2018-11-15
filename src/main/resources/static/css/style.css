@@ -1,0 +1,288 @@
+body {
+    background: whitesmoke;
+    onload: "initialize()"
+
+}
+
+.header {
+    border-radius: 6px;
+    padding: 2px 2px 2px 10px;
+    background: #222629; /*#5D5C61;  #2F2828; color: cadetblue;*/
+    height: 56px;
+    width: 70%;
+    color: cadetblue;
+    font-family: "open-sans-bold";
+    font-size: 16px;
+
+
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    -o-box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+
+}
+
+.nav {
+    float: left;
+    color: cadetblue;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.nav:hover {
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+/* Page content */
+.content {
+    border-radius: 12px;
+    outline-width: 1px;
+    padding: 0px;
+    /* background: #D1E8E2;*/
+    background: white;
+    color: #111010;
+    font-family: "open-sans";
+    font-size: 13px;
+    width: 70%;
+
+}
+
+.content1 {
+    outline-width: 1px;
+    outline-style: dot-dash;
+}
+
+.spacerformbutton {
+    margin-top: 2px;
+    margin-bottom: 10px;
+    horiz-align: center;
+}
+
+hr.style4 {
+    border-top: 1px dotted #8c8b8b;
+}
+
+hr.style18:before {
+     display: block;
+     content: "Made by Alex";
+     align-content: center;
+     height: 30px;
+     margin-top: 30px;
+     border-style: solid;
+     border-color: #8c8b8b;
+     border-width: 0 0 1px 0;
+     border-radius: 20px;
+ }
+hr.style18Profile:before {
+    display: block;
+    align-content: center;
+    height: 30px;
+    margin-top: 30px;
+    border-style: solid;
+    border-color: #8c8b8b;
+    border-width: 0 0 1px 0;
+    border-radius: 20px;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+    position: fixed;
+    top: inherit;
+    left: inherit;
+    width: inherit;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+
+}
+
+.textarea {
+    width: 500px;
+    border: #888888;
+}
+
+.form {
+    display: block;
+    margin-top: 0em;
+    size: inherit;
+    width: 80%;
+}
+
+@font-face {
+    font-family: "open-sans";
+    src: url(../fonts/OpenSans-Regular.ttf)
+}
+
+@font-face {
+    font-family: "open-sans-bold";
+    src: url(../fonts/OpenSans-Bold.ttf)
+}
+
+.img1 {
+    transition: transform 0.3s ease;
+    z-index: 99;
+}
+
+.img2 {
+    transition: transform 0.3s ease;
+    z-index: 99;
+}
+
+.imgProfile {
+    transition: transform 0.2s ease;
+    z-index: 99;
+}
+
+/*
+.img1:hover {
+    -webkit-transform:scale(1.7);
+    transform: scale(1.7, 1.7) translate(58px, -40px);
+    -webkit-align-content: center;
+}
+.img2:hover {
+    -webkit-transform:scale(1.7);
+    transform: scale(1.7, 1.7) translate(-50px,-40px);
+    -webkit-align-content: center;
+}
+*/
+
+.img1:hover {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05, 1.05) translate(0px, -10px);
+    -webkit-align-content: center;
+}
+
+.img2:hover {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05, 1.05) translate(0px, -10px);
+    -webkit-align-content: center;
+}
+
+.divTableCell {
+    -webkit-border-radius: 2px 2px 2px 2px;
+    -moz-border-radius: 2px 2px 2px 2px;
+    border-radius: 2px 2px 2px 2px;
+    background-color: #e3d3c4;
+    -webkit-box-shadow: #B3B3B3 1px 1px 1px;
+    -moz-box-shadow: #B3B3B3 1px 1px 1px;
+    box-shadow: #B3B3B3 1px 1px 1px;
+}
+.divTableCellProfile {
+    -webkit-border-radius: 2px 2px 2px 2px;
+    -moz-border-radius: 2px 2px 2px 2px;
+    border-radius: 2px 2px 2px 2px;
+    background-color: #CFCFCF;
+    -webkit-box-shadow: #B3B3B3 1px 1px 1px;
+    -moz-box-shadow: #B3B3B3 1px 1px 1px;
+    box-shadow: #B3B3B3 1px 1px 1px;
+    padding-left:10px;
+}
+
+.divTableCell2 {
+    -webkit-border-radius: 2px 2px 2px 2px;
+    -moz-border-radius: 2px 2px 2px 2px;
+    border-radius: 2px 2px 2px 2px;
+    background-color: #8cd2ff;
+    -webkit-box-shadow: #B3B3B3 1px 1px 1px;
+    -moz-box-shadow: #B3B3B3 1px 1px 1px;
+    box-shadow: #B3B3B3 1px 1px 1px;
+}
+
+.divTableCell2 {
+    -webkit-border-radius: 2px 2px 2px 2px;
+    -moz-border-radius: 2px 2px 2px 2px;
+    border-radius: 2px 2px 2px 2px;
+    background-color: #8cd2ff;
+    -webkit-box-shadow: #B3B3B3 1px 1px 1px;
+    -moz-box-shadow: #B3B3B3 1px 1px 1px;
+    box-shadow: #B3B3B3 1px 1px 1px;
+}
+
+.divTableMain {
+    -webkit-border-radius: 2px 2px 2px 2px;
+    -moz-border-radius: 2px 2px 2px 2px;
+    border-radius: 2px 2px 2px 2px;
+    /*background-color: #EFF0EF;
+    -webkit-box-shadow: #B3B3B3  1px 1px 1px;
+    -moz-box-shadow:    #B3B3B3  1px 1px 1px;
+    box-shadow:         #B3B3B3 1px 1px 1px;
+    font-family: open-sans;
+    */
+    font-size: 12px;
+    text-decoration-color: #B0B0B0;
+    text-shadow: 0 0 2px #fff;
+
+    /*border: solid 1px #555;
+     */
+
+    background-color: #EFF0EF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+
+}
+
+.divTableprofile {
+    -webkit-border-radius: 2px 2px 2px 2px;
+    -moz-border-radius: 2px 2px 2px 2px;
+    border-radius: 2px 2px 2px 2px;
+    background-color: #CFCFCF;
+    -webkit-box-shadow: #B3B3B3 1px 1px 1px;
+    -moz-box-shadow: #B3B3B3 1px 1px 1px;
+    box-shadow: #B3B3B3 1px 1px 1px 1px;
+    font-family: open-sans;
+    font-size: 16px;
+    text-decoration-color: #B0B0B0;
+    text-shadow: 0 0 2px #fff;
+}
+
+
+.alerts {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+    font-size: 28px;
+}
+
+select.decorated option:hover {
+    box-shadow: 0 0 10px 100px #ffeeba inset;
+}
+
+.wrapper {
+    display: inline-flex;
+    justify-content: center;
+}
+.wrapper i {
+    padding: 10px;
+    text-shadow: 0px 6px 8px rgba(0, 0, 0, 0.6);
+    transition: all ease-in-out 150ms;
+}
+.wrapper a:nth-child(1) {
+    color: #dd4b39;
+}
+.wrapper a:nth-child(2) {
+    color: #4867AA;
+}
+.wrapper a:nth-child(3) {
+    color: #1DA1F2;
+}
+.wrapper i:hover {
+    margin-top: -3px;
+    text-shadow: 0px 14px 10px rgba(0, 0, 0, 0.4);
+}
+
+.profileAbout2 {
+    display: table; /* keep the background color wrapped tight */
+    margin: 0px auto 0px auto; /* keep the table centered */
+    padding:10px;font-size:16px;
+}
+.profileAbout3 {
+    display: table; /* keep the background color wrapped tight */
+    margin: 0px auto 0px auto; /* keep the table centered */
+    padding:10px;font-size:26px;background-color:#CFCFCF;
+
+}

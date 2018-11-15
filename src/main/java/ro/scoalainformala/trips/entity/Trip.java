@@ -1,37 +1,44 @@
 package ro.scoalainformala.trips.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "TRIP")
 public class Trip {
+    public Trip() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private int id;
+    private Long id;
 
     @Column(name = "TITLE")
     private String title;
 
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION", columnDefinition="text")
     private String description;
 
     @Column(name = "START_DATE")
-    private LocalDate startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date startDate;
 
     @Column(name = "END_DATE")
-    private LocalDate endDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date endDate;
 
     @Column(name = "LOCATION")
     private String location;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,19 +58,19 @@ public class Trip {
         this.description = description;
     }
 
-    public LocalDate getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
@@ -73,5 +80,18 @@ public class Trip {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Trip trip = (Trip) o;
+        return Objects.equals(title, trip.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title);
     }
 }

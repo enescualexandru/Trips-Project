@@ -8,26 +8,26 @@ public class Spot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private int id;
+    private long id;
 
     @Column(name = "TITLE")
     private String title;
 
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION", columnDefinition="text")
     private String description;
 
-    @Column(name = "FILEPATH")
+    @Column(name = "FILEPATH", length = 2048)
     private String filePath;
 
     @ManyToOne(targetEntity = Trip.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "TRIPID", nullable = false)
+    @JoinColumn(name = "TRIPID", nullable = true)
     private Trip trip;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
