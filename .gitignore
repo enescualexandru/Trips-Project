@@ -1,6 +1,8 @@
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
+* linguist-vendored
+*.java linguist-vendored=false
 
 ### STS ###
 .apt_generated
